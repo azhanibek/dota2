@@ -1,0 +1,43 @@
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    max-width: 1000px;
+}
+
+.flex-hero-1 {
+    flex-grow: 1;
+    margin: 10px;
+    height: 50px;
+    background-color: aqua;
+    flex-basis: 100px;
+}
+
+.flex-hero-2 {
+    flex-grow: 2;
+    margin: 10px;
+    height: 50px;
+    background-color: aqua;
+    flex-basis: 200px;
+}
+
+.flex-hero-4 {
+    flex-grow: 4;
+    margin: 10px;
+    height: 50px;
+    background-color: aqua;
+    flex-basis: 400px;
+}
+
+.flex-hero-8 {
+    flex-grow: 8;
+    margin: 10px;
+    height: 50px;
+    background-color: aqua;
+    flex-basis: 800px;
+}
+
+.hero-card-img {
+    height: 50px;
+    object-fit: cover;
+    padding-right: 10px;
+}
