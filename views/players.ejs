@@ -1,0 +1,8 @@
+<div class="players-flex-container">
+    <% PlayersList.forEach(playerInfo => { %>
+        <div class="player-card">
+            <img src="<%= playerInfo.avatarfull %>" alt="player_avatar" class="hero-card-img">
+            <p><%= playerInfo.personaname %> </p>
+        </div>
+    <% }); %>
+</div>

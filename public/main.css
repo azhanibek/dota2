@@ -21,5 +21,34 @@
 body{
     /* display: flex;
     justify-content: center; */
-    background-color: bisque;
+    background-color: #2f2f2fff;
+    color: #1c3e57ff;
 }
+
+.cinzel-font {
+    font-family: "Cinzel", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+/* --carmine: #991b1bff;
+--saffron: #f5c542ff;
+--jet: #2f2f2fff;
+--indigo-dye: #1c3e57ff;
+--silver: #b3b3b3ff;
+--jade: #3ca370ff; */
+
+input[type=text] {
+    width: 300px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('searchicon.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    margin-bottom: 10px;
+  }

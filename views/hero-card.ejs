@@ -1,7 +1,7 @@
 <div class="flex-container">
     <div class="flex-hero-1 flex-container"> 
-        <img src="" alt="Hero_img" class="hero-card-img"> 
-        <p> <%= Player.hero_id %></p>
+        <img src="<%= HeroesImgMap.get(Player.hero_id) %>" alt="Hero_img" class="hero-card-img"> 
+        <p> <%= HeroesMap.get(Player.hero_id) %></p>
     </div>
     <div class="flex-hero-4">
         <p> <%= Player.personaname %></p>

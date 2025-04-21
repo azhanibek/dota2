@@ -1,0 +1,13 @@
+.players-flex-container {
+    display: flex;
+    width: 1100px;
+    flex-wrap: wrap;
+}
+
+.player-card{
+    border: 2px solid #b3b3b3ff;
+    background-color: #991b1bff;
+    width: 300px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+}

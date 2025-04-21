@@ -10,7 +10,7 @@
 <body>
     <div class="grid-container">
         <div class="item1">
-            <h1>Dota Hero</h1>
+            <h1 class="cinzel-font">Dota Match by ID</h1>
         </div>
         <div class="item2">
             <h1>
@@ -20,7 +20,7 @@
         <div>
             <% if (typeof Match !== 'undefined' && Match.players) { %>
                 <% for(let i = 0; i<5; i++){ %>
-                    <%- include("hero-card.ejs", { Player: Match.players[i] }) %>
+                    <%- include("hero-card.ejs", { Player: Match.players[i], HeroesMap: HeroesMap, HeroesImgMap: Hero_img }) %>
                 <% }; %>
             <% } else { %>
                 <p>Something went wrong. No match data found.</p>
@@ -29,7 +29,7 @@
         <div>
             <% if (typeof Match !== 'undefined' && Match.players) { %>
                 <% for(let i = 5; i<10; i++){ %>
-                    <%- include("hero-card.ejs", { Player: Match.players[i] }) %>
+                    <%- include("hero-card.ejs", { Player: Match.players[i], HeroesMap: HeroesMap, HeroesImgMap: Hero_img }) %>
                 <% }; %>
             <% } else { %>
                 <p>Something went wrong. No match data found.</p>

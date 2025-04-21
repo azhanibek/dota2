@@ -1,6 +1,7 @@
 import express from "express";
 import axios from "axios";
 import bodyParser from "body-parser";
+import ngrok from "@ngrok/ngrok"
 
 const app = express();
 const port = 3000;
@@ -10,6 +11,10 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded());
 app.set('view engine', 'ejs');
 
+var heroes = [];
+var heroesInit = false;
+var heroesMap = new Map();
+var heroesImgMap = new Map();
 
 function imgURL(heroName){
     //let tempText = heroName.replace(/ /g,'').toLowerCase();
@@ -18,18 +23,25 @@ function imgURL(heroName){
     return IMG_URL;
 }
 
+function heroMapper(heroesArray){
+    heroesArray.forEach(hero => {
+        heroesMap.set(hero.id, hero.localized_name);
+        heroesImgMap.set(hero.id, imgURL(hero.name));
+    });
+}
+
 app.get("/", async (req, res) => {
     try {
-        const response = await axios.get(API_URL + "/heroes")
-        const hero = response.data[Math.floor(Math.random() * response.data.length)];
-        res.render("search-page.ejs", {
-            Hero: hero,
-            Hero_img: imgURL(hero.name)
-        });
+        const response = await axios.get(API_URL + "/heroes");
+        if (!heroesInit) {
+            heroes = response.data;
+            heroesInit = true;
+            heroMapper(heroes);
+        }
+        res.render("search-page.ejs");
     } catch (error) {
-        res.render("index.ejs", {
-            Hero: error.message
-        });
+        res.render("index.ejs");
+        console.log(error.message);
     }
     
 })
@@ -41,8 +53,9 @@ app.post("/match", async (req, res) => {
         const match = response.data;
         // const hero = response.data[Math.floor(Math.random() * response.data.length)];
         res.render("index.ejs", {
-            Match: match
-            //Hero_img: imgURL(hero.name)
+            Match: match,
+            HeroesMap: heroesMap,
+            Hero_img: heroesImgMap
         });
     } catch (error) {
         res.render("index.ejs", {
@@ -52,23 +65,21 @@ app.post("/match", async (req, res) => {
     
 })
 
-app.get("/hero", async (req, res) => {
+app.post("/players", async (req, res) => {
     try {
-        const response = await axios.get(API_URL + "/constants/heroes")
-        let temp = Object.keys(response.data);
-        const hero = response.data[temp[Math.floor(Math.random() * temp.length)]];
-        res.render("index.ejs", {
-            Hero: JSON.stringify(hero),
-            Hero_img: imgURL(hero.name)
+        // console.log(API_URL + `/search?q=${req.body[`playerName`]}`);
+        const response = await axios.get(API_URL + `/search?q=${req.body[`playerName`]}`);
+        res.render("search-page.ejs", {
+            PlayersList: response.data
         });
     } catch (error) {
-        res.render("index.ejs", {
-            Hero: error.message,
-            Hero_img: error.message
-        });
+        console.log(error.message);
     }
-    
 })
+
+// ngrok 
+// ngrok.connect({ addr: port, authtoken_from_env: true })
+// 	.then(listener => console.log(`Ingress established at: ${listener.url()}`));
 
 app.listen(port, (req, res) => {
     console.log(`Server running on port ${port}`);
