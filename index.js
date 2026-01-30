@@ -1,7 +1,6 @@
 import express from "express";
 import axios from "axios";
 import bodyParser from "body-parser";
-import ngrok from "@ngrok/ngrok"
 
 const app = express();
 const port = 3000;
@@ -77,9 +76,6 @@ app.post("/players", async (req, res) => {
     }
 })
 
-// ngrok 
-// ngrok.connect({ addr: port, authtoken_from_env: true })
-// 	.then(listener => console.log(`Ingress established at: ${listener.url()}`));
 
 app.listen(port, (req, res) => {
     console.log(`Server running on port ${port}`);
